@@ -8,11 +8,10 @@ from langchain.llms.base import LLM
 from langchain.agents import AgentExecutor, create_react_agent
 from langchain.prompts import PromptTemplate
 from pydantic import Field
-
-
 from dotenv import load_dotenv
 import os
 load_dotenv()
+
 gemini_api_key = os.getenv("GEMINI_API_KEY")
 
 

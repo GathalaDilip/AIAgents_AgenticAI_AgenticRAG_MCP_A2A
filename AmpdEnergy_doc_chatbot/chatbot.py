@@ -2,7 +2,7 @@
 import streamlit as st
 from retriever import FaissRetriever
 from generator import LocalGenerator
-from agent_langgraph import build_agent
+from agent import build_agent
 import json, os, csv, datetime
 import google.genai.errors
 
@@ -20,6 +20,8 @@ def init_session():
         st.session_state.retriever = FaissRetriever(index_path=INDEX_PATH, meta_path=META_PATH)
     if "agent" not in st.session_state:
         st.session_state.agent = build_agent(st.session_state.retriever)
+    if "exited" not in st.session_state:
+        st.session_state.exited = False
     if "memory" not in st.session_state:
         st.session_state.memory = []  # simple session memory (list of user queries)
 
@@ -47,18 +49,29 @@ def display_sources(sources):
 
 
 # --- Modern Streamlit UI ---
+
 st.set_page_config(page_title="AmpD Enertainer Chatbot", layout="wide")
 init_session()
 
+# --- Welcome Message (show only if not exited) ---
+if not st.session_state.exited:
+    st.markdown("<h2 style='color:#0366d6'>Welcome to the AMPD Chatbot!</h2>", unsafe_allow_html=True)
+    st.markdown("<b>Ask a question about the internal document (type 'exit' to quit):</b>", unsafe_allow_html=True)
+
 # Sidebar branding and instructions
 with st.sidebar:
-    st.image(r"C:\Users\GathalaDilipKumar\Mygit\AIAgents_AgenticAI_AgenticRAG_MCP_A2A\AgenticRAGs\AmpdEnergy_doc_chatbot\image.png", use_container_width=True)
+    st.image(r".\logo.png", use_container_width=True)
     st.markdown("## AmpD Enertainer Chatbot")
     st.markdown("Ampd is electrifying construction. We replace diesel with smart battery storage and digital solutions to create automated, emission-free, and highly efficient worksites for a sustainable future.")
     st.markdown("---")
     st.markdown("**Feedback:** If you spot issues or want to suggest improvements, please contact support@ampd.energy.")
 
+
 # Main UI
+if st.session_state.exited:
+    st.markdown("<h3 style='color:#6f42c1'>Goodbye!</h3>", unsafe_allow_html=True)
+    st.stop()
+
 st.markdown("### Ask a question about the manual:")
 col_input, col_send = st.columns([0.85, 0.15])
 with col_input:
@@ -81,6 +94,10 @@ for i, q in enumerate(example_questions):
 
 # Handle query and show spinner
 if user_query and send_clicked:
+    if user_query.strip().lower() == "exit":
+        st.session_state.exited = True
+        st.markdown("<h3 style='color:#6f42c1'>Goodbye!</h3>", unsafe_allow_html=True)
+        st.stop()
     st.session_state.memory.append(user_query)
     sources = st.session_state.retriever.retrieve(user_query, top_k=10, rerank_k=6)
     context = "\n\n".join([f"[Page {s['page']}] {s['text']}" for s in sources])

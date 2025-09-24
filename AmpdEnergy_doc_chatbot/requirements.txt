@@ -15,7 +15,8 @@ tqdm
 numpy
 scikit-learn
 langchain-community
-angchain-core 
+langchain-core 
 langchain-openai 
 langgraph
 langchain
+google-genai
