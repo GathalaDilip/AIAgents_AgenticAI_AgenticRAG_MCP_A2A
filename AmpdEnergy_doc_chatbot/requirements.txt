@@ -1,0 +1,21 @@
+# Core
+langchain       # pick a recent stable version
+langgraph         # may be pre-release; use --pre if needed
+sentence-transformers
+faiss-cpu
+transformers
+torch
+pyyaml
+pymupdf
+pdf2image
+pytesseract
+Pillow
+streamlit
+tqdm
+numpy
+scikit-learn
+langchain-community
+angchain-core 
+langchain-openai 
+langgraph
+langchain
