@@ -1,6 +1,31 @@
+
 # AmpD Enertainer Chatbot
 
 This application is an interactive chatbot for querying the AmpD Enertainer User Manual. It supports text and image retrieval from the manual PDF, allowing users to ask questions and view relevant content and images.
+
+## Project Structure
+
+```
+Ampd_RAG_Application/
+│
+├── AmpdEnergy_doc_chatbot/
+│   ├── agent.py
+│   ├── chatbot.py
+│   ├── retriever.py
+│   ├── generator.py
+│   ├── create_index.py
+│   ├── requirements.txt
+│   ├── meta.json
+│   ├── index.faiss
+│   ├── feedback.csv
+│   ├── logo.png
+│   ├── extracted_images/
+│   ├── UI_Images/
+│   ├── utils/
+│   └── README.md
+│
+└── README.md
+```
 
 ## Features
 - Ask questions about the AmpD Enertainer manual
