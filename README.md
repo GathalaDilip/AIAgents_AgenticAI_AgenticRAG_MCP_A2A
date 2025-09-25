@@ -45,7 +45,7 @@ Ampd_RAG_Application/
 ### 2. Clone the Repository
 ```
 git clone <your-repo-url>
-cd AIAgents_AgenticAI_AgenticRAG_MCP_A2A/AgenticRAGs/AmpdEnergy_doc_chatbot
+cd Ampd_RAG_Application/AmpdEnergy_doc_chatbot
 ```
 
 
