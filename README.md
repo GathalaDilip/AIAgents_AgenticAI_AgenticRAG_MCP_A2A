@@ -22,7 +22,7 @@ Ampd_RAG_Application/
 │   ├── extracted_images/
 │   ├── UI_Images/
 │   ├── utils/
-│   └── README.md
+│  
 │
 └── README.md
 ```
